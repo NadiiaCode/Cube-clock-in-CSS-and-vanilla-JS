@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+  </head>
+  <body>
+    <div class="cube">
+      <div class="cb-1"></div>
+      <div class="cb-2"></div>
+      <div class="cb-3">
+        <span class="rotate-90"></span>
+      </div>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: rgb(252, 165, 252);
+      }
+
+      @keyframes displaycolor {
+        0% {
+          color: yellow;
+        }
+        50% {
+          color: turquoise;
+        }
+      }
+
+      div[class*="cb"] {
+        width: 100%;
+        height: 100%;
+        line-height: 200px;
+        font-size: 10rem;
+        position: absolute;
+        text-align: center;
+        transform-style: preserve-3d;
+        font-family: "Digital-7", sans-seift;
+      }
+
+      .cube {
+        width: 200px;
+        height: 200px;
+        top: 70%;
+        left: 50%;
+        position: absolute;
+        animation: displaycolor 5s infinite;
+        color: #51ff00;
+        transform-style: preserve-3d;
+        transform: perspective(1000px) rotateX(-45deg) rotateY(-45deg)
+          translateX(-100%) translateY(-100%);
+      }
+
+      .cb-1 {
+        background: black;
+      }
+
+      .cb-2 {
+        background: black;
+        border-left: 0;
+        transform-origin: left center;
+        transform: translateX(100%) rotateY(90deg);
+      }
+
+      .cb-3 {
+        background: black;
+        border-right: 0;
+        border-bottom: 0;
+        transform-origin: center bottom;
+        transform: translateY(-100%) rotateX(90deg);
+      }
+
+      .ratate-90 {
+        display: block;
+        transform-origin: initial;
+        transform: rotate(-90deg);
+      }
+    </style>
+
+    <script>
+      function displaytime(e) {
+        return Number(e) > 9 ? "" + e : "0" + e;
+      }
+
+      var cube = document.querySelectorAll.bind(document);
+      function autoCall() {
+        var n = new this.Date();
+        cube(".cb-1")[0].innerText = displaytime(n.getHours());
+        cube(".cb-2")[0].innerText = displaytime(n.getMinutes());
+        cube(".cb-3>span")[0].innerText = displaytime(n.getSeconds());
+        setTimeout(autoCall, 1000);
+      }
+      window.onload = autoCall;
+    </script>
+  </body>
+</html>
